@@ -25,7 +25,7 @@
       if (source) {
           // if element is an image, set the src
           // else, set image as background
- +        $(this).is('img') ? $(this).attr("src", source) : $(this).css('background-image', 'url("' + source + '")');
+          $(this).is('img') ? $(this).attr("src", source) : $(this).css('background-image', 'url("' + source + '")');
           if (typeof callback === "function") callback.call(this);
       }
     });
