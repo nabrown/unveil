@@ -30,14 +30,16 @@
 
     function unveil() {
       var inview = images.filter(function() {
-        var $e = $(this);
-        if ($e.is(":hidden")) return;
+        var $el = $(this);
+        if ($el.is(":hidden")) return;
 
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
+        var wt = $w.scrollTop(), // window veritical scroll distance
+            wb = wt + $w.height(), // last point of document visible in browser window
+            et = $el.offset().top, // distance from document top to top of element
+            eb = et + $el.height(); // distance from top of document to bottom of element
 
+         // the bottom of the element is below the top of the browser (- threshold)
+        // && the top of the element id above the bottom of the browser (+ threshold)
         return eb >= wt - th && et <= wb + th;
       });
 
