@@ -23,8 +23,10 @@
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
+          // if element is an image, set the src
+          // else, set image as background
+ +        $(this).is('img') ? $(this).attr("src", source) : $(this).css('background-image', 'url("' + source + '")');
+          if (typeof callback === "function") callback.call(this);
       }
     });
 
@@ -38,7 +40,7 @@
             et = $el.offset().top, // distance from document top to top of element
             eb = et + $el.height(); // distance from top of document to bottom of element
 
-         // the bottom of the element is below the top of the browser (- threshold)
+        // the bottom of the element is below the top of the browser (- threshold)
         // && the top of the element id above the bottom of the browser (+ threshold)
         return eb >= wt - th && et <= wb + th;
       });
