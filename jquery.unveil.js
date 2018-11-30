@@ -6,6 +6,9 @@
  * Licensed under the MIT license.
  * Copyright 2013 Luís Almeida
  * https://github.com/luis-almeida
+ * 
+ * Updated by Nora Brown to include `srcset`
+ * https://github.com/nabrown/unveil
  */
 
 ;(function($) {
@@ -14,48 +17,48 @@
 
     var $w = $(window),
         th = threshold || 0,
-        retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
-        images = this,
-        loaded;
+        images = this;
 
-    this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
+    images.one("unveil", function() {
+      var $img = $(this);
+      var source = $img.attr("data-src");
+      var sourceset = $img.attr("data-srcset");
       if (source) {
-          // if element is an image, set the src
-          // else, set image as background
-          $(this).is('img') ? $(this).attr("src", source) : $(this).css('background-image', 'url("' + source + '")');
-          if (typeof callback === "function") callback.call(this);
+        $img.attr("src", source);
       }
+      if (sourceset) {
+        $img.attr('srcset', sourceset);
+      }
+      if (typeof callback === "function") callback.call(this);
     });
 
-    var debouncedUnveil = debounce(unveil, 100);
-
     function unveil() {
+      // create an array of images that are in view
+      // by filtering the intial array
       var inview = images.filter(function() {
-        var $el = $(this);
-        if ($el.is(":hidden")) return;
+        var $e = $(this);
+        // if the image is hidden, don't bother
+        if ($e.is(":hidden")) return;
 
-        var wt = $w.scrollTop(), // window veritical scroll distance
+        var wt = $w.scrollTop(), // window vertical scroll distance
             wb = wt + $w.height(), // last point of document visible in browser window
-            et = $el.offset().top, // distance from document top to top of element
-            eb = et + $el.height(); // distance from top of document to bottom of element
+            et = $e.offset().top, // distance from document top to top of element
+            eb = et + $e.height(); // distance from top of document to bottom of element
 
         // the bottom of the element is below the top of the browser (- threshold)
-        // && the top of the element id above the bottom of the browser (+ threshold)
+        // && the top of the element is above the bottom of the browser (+ threshold)
         return eb >= wt - th && et <= wb + th;
       });
 
-      loaded = inview.trigger("unveil");
-      images = images.not(loaded);
+      // trigger an 'unveil' event on each of the inview images
+      inview.trigger("unveil");
+      
+      // filter the images to only those that aren't in view yet
+      images = images.not(inview);
     }
 
     // https://davidwalsh.name/javascript-debounce-function
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds. If `immediate` is passed, trigger the function on the
-    // leading edge, instead of the trailing.
+    // from underscore.js
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
@@ -72,7 +75,10 @@
       };
     };
 
-    $w.on("scroll.unveil resize.unveil lookup.unveil touchmove.unveil", debouncedUnveil);
+    var debouncedUnveil = debounce(unveil, 100);
+
+    // bind (with debounce) to various namespaced browser events
+    $w.on("scroll.unveil resize.unveil lookup.unveil", debouncedUnveil);
 
     unveil();
 
