@@ -36,14 +36,14 @@
       // create an array of images that are in view
       // by filtering the intial array
       var inview = images.filter(function() {
-        var $e = $(this);
+        var $img = $(this);
         // if the image is hidden, don't bother
-        if ($e.is(":hidden")) return;
+        if ($img.is(":hidden")) return;
 
         var wt = $w.scrollTop(), // window vertical scroll distance
             wb = wt + $w.height(), // last point of document visible in browser window
-            et = $e.offset().top, // distance from document top to top of element
-            eb = et + $e.height(); // distance from top of document to bottom of element
+            et = $img.offset().top, // distance from document top to top of element
+            eb = et + $img.height(); // distance from top of document to bottom of element
 
         // the bottom of the element is below the top of the browser (- threshold)
         // && the top of the element is above the bottom of the browser (+ threshold)
