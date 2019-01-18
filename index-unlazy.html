@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="description" content="Lazy load your images with a small jQuery plugin.">
+      <meta name="keywords" content="javascript, jquery, lazy load, performance, plugin" />
+      <meta name="author" content="Nora Brown; original: Luís Almeida">
+      <meta name="viewport" content="width=device-width">
+
+      <link href="style.css" rel="stylesheet" />
+
+      <title>jQuery Unveil (with srcset) - A very lightweight plugin to lazy load images</title>
+  </head>  
+
+  <body>
+    <div class="intro">
+      <h1>A Selection of Fungi</h1>
+    </div>
+    <figure>
+      <figcaption>A mushroom with purple gills</figcaption>
+      <img src="img/purple-gills-700.jpg" class="unveil" 
+        srcset="img/purple-gills-1400.jpg 1400w, img/purple-gills-2800.jpg 2800w"
+        alt="A small mushroom with pink-purple, widly-spaced gills, lying on a green mossy background."
+      />
+    </figure>
+    <figure>
+      <figcaption>The underside of a polypore, with bruising</figcaption>
+      <img src="img/polypore-525.jpg" class="unveil" 
+        srcset="img/polypore-1050.jpg 1050w, img/polypore-2100.jpg 2100w"
+        alt="Densely-packed irregularly-shaped pores on the white underside of a shelf mushroom, with brown splotches."
+      />
+    </figure>
+    <figure>
+      <figcaption>A group of puffball mushrooms</figcaption>
+      <img src="img/puffballs-525.jpg" class="unveil" 
+        srcset="img/puffballs-1050.jpg 1050w, img/puffballs-2100.jpg 2100w"
+        alt="A cluster of smooth, balloon-like, off-white puffball mushrooms growing on dead wood."
+      />
+    </figure>
+    <figure>
+      <figcaption>A delicious black trumpet</figcaption>
+      <img src="img/black-trumpet-700.jpg" class="unveil" 
+        srcset="img/black-trumpet-1400.jpg 1400w, img/black-trumpet-2800.jpg 2800w"
+        alt="Top view of a delicate light gray-brown, funnel-shaped mushroom amongst leaf litter on the forest floor."
+      />
+    </figure>
+  </body>
+</html>
