@@ -1,16 +1,4 @@
-# unveil.js
-### A very lightweight plugin to lazy load images for jQuery
-
-Set the `src` to a placeholder image with the same proportions as your final image. Or, use a relatively low-resolution version of your image.
-
-Then use `data-src` and `data-srcset` as you normally would use `src` and `srcset`.
-
-The two arguments are:
-
-- a "look-ahead" distance (in px) to start loading images before they reach the browser viewport.
-- a callback function
-
-For a lightweight fallback for users without Javascript, add a link to a plain html page.
+# unveil.js - A very lightweight jQuery plugin to lazy load images
 
 ## Usage
 
@@ -31,8 +19,20 @@ For a lightweight fallback for users without Javascript, add a link to a plain h
 </script>  
 ```
 
+Set the `src` to a placeholder image with the same proportions as your final image. Or, use a relatively low-resolution version of your image.
 
-Visit unveil's [original project page](http://luis-almeida.github.com/unveil/).
+Then use `data-src` and `data-srcset` as you normally would use `src` and `srcset`.
+
+The two arguments are:
+
+- a "look-ahead" distance (in px) to start loading images before they reach the browser viewport.
+- a callback function
+
+For a lightweight fallback for users without Javascript, add a link to a plain html page.
+
+--
+
+This is a fork of [Luis Almeda's original](http://luis-almeida.github.com/unveil/).
 
 ### License
 Unveil is licensed under the [MIT license](http://opensource.org/licenses/MIT).
